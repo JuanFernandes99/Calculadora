@@ -1,0 +1,38 @@
+.btn {
+  width: 100%;
+  height: 100%;
+}
+
+/*Calculadora no centro da página*/
+table {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body {
+  background-image: url('backgroundCalculator.jfif');
+  background-color: #cccccc;
+  background-size: cover;
+}
+
+#resultado {
+  background-color: #4d4c59;
+  color: white;
+  text-align: right;
+}
+
+.btnOperator {
+  background-color: #f99e29;
+}
+
+.btnLimpar,
+.btnMaisMenos,
+.btnPercentagem {
+  background-color: #605f64;
+}
+.btnNumber,
+.btnDecimal {
+  background-color: #737478;
+}
