@@ -1,4 +1,4 @@
-# Calculator
+# Calculadora
 Projeto: Calculadora
 
 ## Aspetos a respeitar
