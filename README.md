@@ -17,10 +17,7 @@ Projeto: Calculadora
     - Todas as operações númericas (multiplicação, divisão, adição e subtração) é para implementar
     - Botões de operação devem ser incluidos no visor
         - Se multiplicamos 8 por 8, deve aparecer no visor 8x8
-    - Qualquer divisão por 0 deve aparecer o texto “Not a number” no visor.
-        
-        ![Screenshot 2022-04-22 at 16.21.48.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ce5494c9-e91c-4a47-8b88-f3e95c86b0ac/Screenshot_2022-04-22_at_16.21.48.png)
-        
+    - Qualquer divisão por 0 deve aparecer o texto “Not a number” no visor.  
     - Quando carregamos no botão de igual → calcula o resultado atualmente no visor
     - Números negativos são possíveis
         - A operação `0 - 6` deve mostrar no visor `-6`
