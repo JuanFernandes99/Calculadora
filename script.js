@@ -35,12 +35,11 @@ const inserirOperadores = function (operador) {
   }
 };
 
-//Função criada para reemplazar os operadores matematicos que nao permitem reresolverr
+//Função criada para reemplazar os operadores matematicos que nao permitem resolver
 // a operaçao matematica para os que sim permitem por exemplo : (8x8) //erro
 // (8*8) = 64
 const substituirString = function () {
-  valorVisor = valorVisor.value;
-  let resultado = valorVisor
+  let resultado = valorVisor.value
     .replaceAll('x', '*')
     .replaceAll('÷', '/')
     .replaceAll(',', '.')
@@ -64,7 +63,8 @@ const resolver = function () {
     if (resultado === Infinity) {
       valorVisor.value = 'Not a number';
     } else {
-      document.getElementById('resultado').value = resultado;
+      // document.getElementById('resultado').value = resultado;
+      valorVisor.value = resultado;
     }
   }
 };
