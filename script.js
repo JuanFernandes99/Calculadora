@@ -5,13 +5,21 @@ let valorVisor;
 //Variável que vai armazenar o último caracter da string
 let ultimoCaracterString;
 
-//Funçao criada para limpar o visor e coloca o valorVisor no estado inicial
+//Função criada para limpar o visor e coloca o valorVisor no estado inicial
 const limpar = function () {
   document.querySelector('#resultado').value = '0';
 };
 
+//Função criada para limpar o visor quando o value seja Not a Number
+const checkNan = function () {
+  if (document.querySelector('#resultado').value === 'Not a number') {
+    limpar();
+  }
+};
+
 //Função criada para inserir os números no visor (0-9)
 const inserirNumeros = function (numero) {
+  checkNan();
   valorVisor = document.querySelector('#resultado').value;
   valorVisor === '0'
     ? (document.querySelector('#resultado').value = numero)
@@ -20,14 +28,15 @@ const inserirNumeros = function (numero) {
 
 //Função criada para inserir os operadores matemáticos, e a virgula para os números decimais (x,÷,)
 const inserirOperadores = function (operador) {
+  checkNan();
   valorVisor = document.querySelector('#resultado').value;
 
   ultimoCaracterString = valorVisor.charAt(valorVisor.length - 1);
 
   // Com esta linha de código evitamos operadores seguidos por exemplo: (8++2)
-  ultimoCaracterString.match(/^(x|[/]|÷|[+]|[-]|[*]||,|)$/)
-    ? null
-    : (document.querySelector('#resultado').value += operador);
+  if (!ultimoCaracterString.match(/^(x|[/]|÷|[+]|[-]|[*]||,|)$/)) {
+    document.querySelector('#resultado').value += operador;
+  }
 };
 
 //Função criada para reemplazar os operadores matematicos que nao permitem reresolverr
