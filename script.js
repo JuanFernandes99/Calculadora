@@ -1,18 +1,18 @@
 'use strict';
 
 //Variável que vai conter o conteudo atual do visor
-let valorVisor;
+let valorVisor = document.querySelector('#resultado');
 //Variável que vai armazenar o último caracter da string
 let ultimoCaracterString;
 
 //Função criada para limpar o visor e coloca o valorVisor no estado inicial
 const limpar = function () {
-  document.querySelector('#resultado').value = '0';
+  valorVisor.value = '0';
 };
 
 //Função criada para limpar o visor quando o value seja Not a Number
 const checkNan = function () {
-  if (document.querySelector('#resultado').value === 'Not a number') {
+  if (valorVisor.value === 'Not a number') {
     limpar();
   }
 };
@@ -20,22 +20,18 @@ const checkNan = function () {
 //Função criada para inserir os números no visor (0-9)
 const inserirNumeros = function (numero) {
   checkNan();
-  valorVisor = document.querySelector('#resultado').value;
-  valorVisor === '0'
-    ? (document.querySelector('#resultado').value = numero)
-    : (document.querySelector('#resultado').value += numero);
+  valorVisor.value === '0'
+    ? (valorVisor.value = numero)
+    : (valorVisor.value += numero);
 };
 
 //Função criada para inserir os operadores matemáticos, e a virgula para os números decimais (x,÷,)
 const inserirOperadores = function (operador) {
   checkNan();
-  valorVisor = document.querySelector('#resultado').value;
-
-  ultimoCaracterString = valorVisor.charAt(valorVisor.length - 1);
-
+  ultimoCaracterString = valorVisor.value.charAt(valorVisor.length - 1);
   // Com esta linha de código evitamos operadores seguidos por exemplo: (8++2)
   if (!ultimoCaracterString.match(/^(x|[/]|÷|[+]|[-]|[*]||,|)$/)) {
-    document.querySelector('#resultado').value += operador;
+    valorVisor.value += operador;
   }
 };
 
@@ -43,7 +39,7 @@ const inserirOperadores = function (operador) {
 // a operaçao matematica para os que sim permitem por exemplo : (8x8) //erro
 // (8*8) = 64
 const substituirString = function () {
-  valorVisor = document.querySelector('#resultado').value;
+  valorVisor = valorVisor.value;
   let resultado = valorVisor
     .replaceAll('x', '*')
     .replaceAll('÷', '/')
@@ -66,7 +62,7 @@ const resolver = function () {
     let resultado = eval(novaString);
     // Qualquer divisão por 0 deve aparecer o texto “Not a numero” no visor.
     if (resultado === Infinity) {
-      document.querySelector('#resultado').value = 'Not a number';
+      valorVisor.value = 'Not a number';
     } else {
       document.getElementById('resultado').value = resultado;
     }
@@ -100,14 +96,14 @@ document.addEventListener('keydown', function (event) {
       break;
 
     case 'Backspace':
-      valorVisor = document.querySelector('#resultado').value;
+      valorVisor = valorVisor.value;
       // If criado para impedir que quando apagarmos o último número fique vazio
       if (valorVisor.length === 1) {
-        document.querySelector('#resultado').value = '0';
+        valorVisor.value = '0';
       }
       // If criado para impedir que apaguemos o valor inicial que é o número 0
       else if (valorVisor !== '0') {
-        document.querySelector('#resultado').value = valorVisor.slice(0, -1);
+        valorVisor.value = valorVisor.slice(0, -1);
       }
       break;
 
