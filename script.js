@@ -1,7 +1,7 @@
 'use strict';
 
 //Variável que vai conter o conteudo atual do visor
-let valorVisor = document.querySelector('#resultado');
+const valorVisor = document.getElementById('resultado');
 //Variável que vai armazenar o último caracter da string
 let ultimoCaracterString;
 
@@ -12,7 +12,7 @@ const limpar = function () {
 
 //Função criada para limpar o visor quando o value seja Not a Number
 const checkNan = function () {
-  if (valorVisor.value === 'Not a number') {
+  if (document.querySelector('#resultado').value === 'Not a number') {
     limpar();
   }
 };
@@ -28,14 +28,17 @@ const inserirNumeros = function (numero) {
 //Função criada para inserir os operadores matemáticos, e a virgula para os números decimais (x,÷,)
 const inserirOperadores = function (operador) {
   checkNan();
-  ultimoCaracterString = valorVisor.value.charAt(valorVisor.length - 1);
-  // Com esta linha de código evitamos operadores seguidos por exemplo: (8++2)
+
+  ultimoCaracterString = valorVisor.value.charAt(valorVisor.value.length - 1);
+
+  // Verificação para impedir que repitamos algum operador
+  // (por exemplo: 5++ ou 5+ sem nenhum número afrente)
   if (!ultimoCaracterString.match(/^(x|[/]|÷|[+]|[-]|[*]||,|)$/)) {
     valorVisor.value += operador;
   }
 };
 
-//Função criada para reemplazar os operadores matematicos que nao permitem resolver
+//Função criada para reemplazar os operadores matematicos que nao permitem reresolverr
 // a operaçao matematica para os que sim permitem por exemplo : (8x8) //erro
 // (8*8) = 64
 const substituirString = function () {
@@ -55,17 +58,12 @@ const resolver = function () {
   let novaString = substituirString();
   ultimoCaracterString = novaString.charAt(novaString.length - 1);
 
-  // Verificação para impedir que repitamos algum operador
-  // (por exemplo: 5++ ou 5+ sem nenhum número afrente)
-  if (!ultimoCaracterString.match(/^(x|[/]|÷|[+]|[-]|[*]||,|)$/)) {
-    let resultado = eval(novaString);
-    // Qualquer divisão por 0 deve aparecer o texto “Not a numero” no visor.
-    if (resultado === Infinity) {
-      valorVisor.value = 'Not a number';
-    } else {
-      // document.getElementById('resultado').value = resultado;
-      valorVisor.value = resultado;
-    }
+  let resultado = eval(novaString);
+  // Qualquer divisão por 0 deve aparecer o texto “Not a numero” no visor.
+  if (resultado === Infinity) {
+    valorVisor.value = 'Not a number';
+  } else {
+    valorVisor.value = resultado;
   }
 };
 
@@ -96,14 +94,13 @@ document.addEventListener('keydown', function (event) {
       break;
 
     case 'Backspace':
-      valorVisor = valorVisor.value;
       // If criado para impedir que quando apagarmos o último número fique vazio
-      if (valorVisor.length === 1) {
+      if (valorVisor.value.length === 1) {
         valorVisor.value = '0';
       }
       // If criado para impedir que apaguemos o valor inicial que é o número 0
-      else if (valorVisor !== '0') {
-        valorVisor.value = valorVisor.slice(0, -1);
+      else if (valorVisor.value !== '0') {
+        valorVisor.value = valorVisor.value.slice(0, -1);
       }
       break;
 
