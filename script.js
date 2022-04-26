@@ -58,12 +58,16 @@ const resolver = function () {
   let novaString = substituirString();
   ultimoCaracterString = novaString.charAt(novaString.length - 1);
 
-  let resultado = eval(novaString);
-  // Qualquer divisão por 0 deve aparecer o texto “Not a numero” no visor.
-  if (resultado === Infinity) {
-    valorVisor.value = 'Not a number';
-  } else {
-    valorVisor.value = resultado;
+  // Verificação para impedir que repitamos algum operador
+  // (por exemplo: 5++ ou 5+ sem nenhum número afrente) (quando utilizamos o backspace)
+  if (!ultimoCaracterString.match(/^(x|[/]|÷|[+]|[-]|[*]||,|)$/)) {
+    let resultado = eval(novaString);
+    // Qualquer divisão por 0 deve aparecer o texto “Not a numero” no visor.
+    if (resultado === Infinity) {
+      valorVisor.value = 'Not a number';
+    } else {
+      valorVisor.value = resultado;
+    }
   }
 };
 
